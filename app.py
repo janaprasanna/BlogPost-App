@@ -1,4 +1,4 @@
-from templates import createapp
+from website import createapp
 # this file is just used to call the func createapp() to initialise the contents from init file.
 
 
