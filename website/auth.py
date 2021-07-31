@@ -16,3 +16,5 @@ def sign_up():
 @auth.route('/logout')
 def logout():
     return redirect(url_for('views.home'))
+    ''' when the user presses logout, instead of a new logout.html template, we are redirecting him
+    to the home page by accessing the home() function of 'views' BLUEPRINT. '''
