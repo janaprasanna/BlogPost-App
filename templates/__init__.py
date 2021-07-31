@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import login_manager
 
+
+
+
 def createapp():
     myapp = Flask(__name__)
     myapp.config["SECRET_KEY"] = "key_jana"
