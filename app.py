@@ -1,0 +1,24 @@
+from templates import createapp
+
+if __name__ == "__main__":
+    app = createapp()
+    app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
