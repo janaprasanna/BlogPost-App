@@ -15,8 +15,9 @@ def createapp():
 
     #configuring SQL
     myapp.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    #myapp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     db.init_app(myapp)
-    create_database(myapp)
+
 
     #importing blueprints
     from .views import views
@@ -25,7 +26,7 @@ def createapp():
     from .auth import auth
     myapp.register_blueprint(auth,url_prefix="/")
 
-
+    #NOTR: WITHOUT IMPORTING THE TABLES DO NOT CREATE THE DATABASE !!
     from .dbmodels import User
     create_database(myapp)
     #configuring login manager (controls the login and log out process
