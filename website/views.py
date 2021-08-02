@@ -3,7 +3,7 @@ from flask_login import login_required, current_user #current user method stores
 #this particular file "views.py" is created to organise all types of view pages that the users sees
 views = Blueprint("views", __name__)
 from . import db
-from .dbmodels import Post
+from .dbmodels import Post, User
 
 
 
@@ -34,3 +34,33 @@ def create_post():
             flash("Post created :)", category="success")
             return  redirect(url_for('views.home'))
     return render_template('create_post.html',user=current_user)
+
+
+#a dyaamic route
+@views.route('/delete-post/<id>')
+@login_required
+def del_post(id):
+    post = Post.query.filter_by(id=id).first()
+    if not post:
+        flash("post doesnt exist." , category="error")
+    elif current_user.id != post.id:
+        flash("you do not have permission to delete this.", category="error")
+        #if somebody directly tries to delete the post via http link eg: /delete-post/1
+    else:
+        db.session.delete(post)
+        db.session.commit()
+        flash("Post Deleted Successfully.")
+
+    return redirect(url_for('views.home'))
+
+
+@views.route('/posts/<username>')
+@login_required
+def viewmypost(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        flash("No user with that username exists.", category="error")
+        return redirect(url_for('views.home'))
+    post = Post.query.filter_by(username=username).all()
+    return render_template('posts.html',user=current_user, posts=post,username=username)
+
