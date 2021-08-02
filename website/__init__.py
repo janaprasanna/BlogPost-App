@@ -27,7 +27,7 @@ def createapp():
     myapp.register_blueprint(auth,url_prefix="/")
 
     #NOTR: WITHOUT IMPORTING THE TABLES DO NOT CREATE THE DATABASE !!
-    from .dbmodels import User
+    from .dbmodels import User, Post
     create_database(myapp)
     #configuring login manager (controls the login and log out process
     login_manager = LoginManager()
