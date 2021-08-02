@@ -12,7 +12,8 @@ from .dbmodels import Post
 @views.route('/home')
 @login_required #only if there is a user logged in, he can access home page !
 def home():
-    return render_template('home.html',user=current_user)
+    posts = Post.query.all()
+    return render_template('home.html',user=current_user,posts=posts)
 
 
 
@@ -31,4 +32,5 @@ def create_post():
             db.session.add(post)
             db.session.commit()
             flash("Post created :)", category="success")
+            return  redirect(url_for('views.home'))
     return render_template('create_post.html',user=current_user)

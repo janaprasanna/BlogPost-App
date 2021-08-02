@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}user.email{% endblock %}
 
 
 {% block content%}
-HOME PAGE
-{% endblock %}
+    {%for post in posts%}
+        {{post.user.username}} : {{post.date_created}}
+        <p>Post: {{post.text}}</p>
+    {%endfor%}
+{% endblock%}
