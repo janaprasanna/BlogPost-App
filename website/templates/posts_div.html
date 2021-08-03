@@ -28,6 +28,17 @@
       </div>
       <div class="card-body">
         <div class="card-text">{{post.text}}</div><br>
+        <div class="collapse" id="comments-{{post.id}}"> 
+            <div class="card">
+                <div class="class-body" id="comments-expanded-{{post.id}}">
+                    {%for comment in post.comments%}
+                      <div class="d-flex justify-content-between aligh-items-center">
+                          
+                      </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
         <form method="POST" action="/comment/{{post.id}}" class="input -group mb-3">
           <input type="text" id="text" name="text" class="form-control" placeholder="wanna comment?">
           <button type="submit" class="btn btn-primary">Comment</button>
