@@ -22,7 +22,11 @@
       {% endif %}
     </div>
     <div class="card-body">
-      <div class="card-text">{{post.text}}</div>
+      <div class="card-text">{{post.text}}</div><br>
+      <form method="POST" action="/posts/create-comment" class="input -group mb-3">
+        <input type="text" id="text" name="text" class="form-control" placeholder="wanna comment?">
+        <button type="submit" class="btn btn-primary">Comment</button>
+      </form>
     </div>
     <div class="card-footer text-muted">{{post.date_created}}</div>
   </div>
