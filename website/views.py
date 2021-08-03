@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, url_for, request, redirect, flash
-from flask_login import login_required, current_user #current user method stores the info of recently logged in or currently logged in user in session
+from flask_login import login_required, current_user
+from sqlalchemy.sql.expression import text #current user method stores the info of recently logged in or currently logged in user in session
 #this particular file "views.py" is created to organise all types of view pages that the users sees
 views = Blueprint("views", __name__)
 from . import db
-from .dbmodels import Post, User
+from .dbmodels import Post, User, Comment
 
 
 
@@ -65,3 +66,20 @@ def viewmypost(username):
     #post = Post.query.filter_by(author=user.id).all()
     return render_template('posts.html',user=current_user, posts=post,username=username)
 
+
+#adding comments to database
+@views.route('/comment/<postid>',methods=["GET","POST"])
+def create_comment(postid):
+    if request.method == "POST":
+        comment = request.form.get("text")
+        if not comment:
+            flash("Field is empty !!")
+        else:
+            post =  Post.query.filter_by(id=postid)
+            if post:
+                add_comment = Comment(text=comment, author=current_user.id, post_id=postid)
+                db.session.add(add_comment)
+                db.session.commit()
+            else:
+                flash("Post Doesnt Exists!!", category="error")
+        return redirect(url_for('views.home'))

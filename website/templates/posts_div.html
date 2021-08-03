@@ -28,7 +28,7 @@
       </div>
       <div class="card-body">
         <div class="card-text">{{post.text}}</div><br>
-        <form method="POST" action="/posts/create-comment/{{post.id}}" class="input -group mb-3">
+        <form method="POST" action="/comment/{{post.id}}" class="input -group mb-3">
           <input type="text" id="text" name="text" class="form-control" placeholder="wanna comment?">
           <button type="submit" class="btn btn-primary">Comment</button>
         </form>
