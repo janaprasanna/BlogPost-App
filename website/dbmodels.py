@@ -42,7 +42,8 @@ class Post(db.Model):
     table, this property automatically cascades and deletes all the posts made by him'''
 
 
-
+    '''ondelete and passive_deletes are same - they delete a row automatically
+     when any one of the referenced table's row is deleted'''
 
 
 class Comment(db.Model):

@@ -34,7 +34,7 @@ def sign_up():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        email_exists = User.query.filter_by(email=email).first()
+        email_exists = User.query.filter_by(email=email).first()#filter_by(column-name=VALUE)
         username_exists = User.query.filter_by(username=username).first()
 
         if email_exists:
